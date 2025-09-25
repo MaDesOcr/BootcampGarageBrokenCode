@@ -10,16 +10,16 @@ import model.Voiture;
 
 public class Menu implements MenuInterface{
 
-	boolean isOn = false;
+	boolean isOn = true;
 	Garage garage = new Garage();
 
 	public void launch() {
 		while(isOn) {
 			printMenuInitial();
-			int choixUtil = saisieString();
+			int choixUtil = saisieInt();
 			handleUtilisateurChoix(choixUtil);
 			tempsQuiPasse();
-		} do;
+		}
 	}
 	
 //-------------------------------NO PROBLEM BELOW THIS POINT-----------------------
