@@ -10,8 +10,6 @@ public class Garage {
 	public Garage() {
 	}
 
-	
-	
 	public HashMap<String, Voiture> getGarage() {
 		return garage;
 	}
@@ -19,8 +17,6 @@ public class Garage {
 	public void setGarage(HashMap<String, Voiture> garage) {
 		this.garage = garage;
 	}
-
-
 
 	@Override
 	public String toString() {

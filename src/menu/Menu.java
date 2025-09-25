@@ -1,5 +1,10 @@
 package menu;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Map.Entry;
 import java.util.Scanner;
@@ -12,8 +17,11 @@ public class Menu implements MenuInterface{
 
 	boolean isOn = true;
 	Garage garage = new Garage();
-
+	private final String FILE = "garageSave.txt";
+	
+	
 	public void launch() {
+		restaureGarage();
 		while(isOn) {
 			printMenuInitial();
 			int choixUtil = saisieInt();
@@ -23,6 +31,31 @@ public class Menu implements MenuInterface{
 	}
 	
 //-------------------------------NO PROBLEM BELOW THIS POINT-----------------------
+	
+	public void restaureGarage() {
+		try {
+			FileReader fr = new FileReader(FILE);
+			BufferedReader bf = new BufferedReader(fr);
+			String line;
+			while((line = bf.readLine()) != null) {
+				String[] lineSplit = line.split(",");
+				
+				garage.getGarage().put(lineSplit[1], new Voiture(
+						Integer.parseInt(lineSplit[0]),
+						lineSplit[1],
+						Integer.parseInt(lineSplit[2]),
+						Boolean.parseBoolean(lineSplit[3])));
+				
+				System.out.println(garage);
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
 	
 	
 	public void tempsQuiPasse() {
@@ -55,6 +88,7 @@ public class Menu implements MenuInterface{
 			System.out.println(garage);
 			break;
 		case 5 : saveTheGarage();
+			break;
 		case 6 :
 			bye();
 			// System.exit(0);
@@ -64,10 +98,14 @@ public class Menu implements MenuInterface{
 		}
 	}
 
-	//NO TODO
 	private void saveTheGarage() {
-		
-		
+		try (FileWriter fw = new FileWriter(FILE)) {
+			for(Voiture v : garage.getGarage().values()) {
+				fw.write(v.toString());
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}	
 	}
 
 	private void fillTheTank() {

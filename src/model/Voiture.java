@@ -18,6 +18,16 @@ public class Voiture {
 
 
 
+	public Voiture(int nbRoues, String mODEL, int essence, boolean marche) {
+		super();
+		this.nbRoues = nbRoues;
+		MODEL = mODEL;
+		this.essence = essence;
+		this.marche = marche;
+	}
+
+
+
 	public int getNbRoues() {
 		return nbRoues;
 	}
@@ -62,7 +72,7 @@ public class Voiture {
 
 	@Override
 	public String toString() {
-		return "Voiture [nbRoues=" + nbRoues + ", model=" + MODEL + ", essence=" + essence + ", marche=" + marche + "]";
+		return nbRoues + "," + MODEL + ","+ essence + ","+ marche;
 	}
 
 	
